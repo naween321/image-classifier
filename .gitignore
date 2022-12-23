@@ -188,3 +188,5 @@ venv/
 .env
 env/
 .idea
+env
+db.sqlite3
