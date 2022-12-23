@@ -190,3 +190,4 @@ env/
 .idea
 env
 db.sqlite3
+image_classifier/env.py
