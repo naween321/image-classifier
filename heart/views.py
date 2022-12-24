@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 
 def classify_image(request):
-    return HttpResponse("HI")
+    return render(request, 'classify.html')
