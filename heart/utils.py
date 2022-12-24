@@ -3,8 +3,6 @@ import joblib
 import json
 import numpy as np
 import base64
-from wavelet import w2d
-
 
 __class_name_to_number = {}
 __class_number_to_name = {}
@@ -16,6 +14,7 @@ def class_number_to_name(class_num):
 
 
 def classify_image(image_base64_data, file_path=None):
+    from .wavelet import w2d
     imgs = get_cropped_image_if_2_eyes(file_path, image_base64_data)
     result = []
     for img in imgs:
@@ -34,15 +33,15 @@ def classify_image(image_base64_data, file_path=None):
 
 
 def get_cv2_image_from_base64_string(b64str):
-    encoded_data = b64str.split(',')[1]
+    encoded_data = b64str
     nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     return img
 
 
 def get_cropped_image_if_2_eyes(image_path, image_base64_data):
-    face_cascade = cv2.CascadeClassifier('opencv/haarcascades/haarcascade_frontalface_default.xml')
-    eye_cascade = cv2.CascadeClassifier('opencv/haarcascades/haarcascade_eye.xml')
+    face_cascade = cv2.CascadeClassifier('C:/Users/ACER/PycharmProjects/image_classifier/heart/opencv/haarcascades/haarcascade_frontalface_default.xml')
+    eye_cascade = cv2.CascadeClassifier('C:/Users/ACER/PycharmProjects/image_classifier/heart/opencv/haarcascades/haarcascade_eye.xml')
 
     if image_path:
         img = cv2.imread(image_path)
@@ -65,13 +64,13 @@ def load_saved_artifacts():
     global __class_name_to_number
     global __class_number_to_name
 
-    with open("dataset/test/class_dictionary.json", "r") as f:
+    with open("C:/Users/ACER/PycharmProjects/image_classifier/heart/dataset/test/class_dictionary.json", "r") as f:
         __class_name_to_number = json.load(f)
         __class_number_to_name = {v: k for k, v in __class_name_to_number.items()}
 
     global __model
     if __model is None:
-        with open("dataset/test/saved_model.pkl", "rb") as f:
+        with open("C:/Users/ACER/PycharmProjects/image_classifier/heart/dataset/test/saved_model.pkl", "rb") as f:
             __model = joblib.load(f)
     print("loading saved artifacts...done")
 
