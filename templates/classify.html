@@ -29,9 +29,9 @@
         <div class="col-md-6">
             <form method="post" enctype="multipart/form-data" action="{% url 'classify_image' %}">
                 {% csrf_token %}
+                <p>Only capable to recognize the players above</p>
                 <label>Upload an image to classify</label>
                 <input type="file" name="file"><br><br>
-                <p>Only capable to recognize the players above</p>
                 <button class="btn btn-success" type="submit">Classify</button>
             </form>
         </div>
